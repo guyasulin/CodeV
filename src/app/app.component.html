@@ -1,1 +1,45 @@
 <app-sidenav></app-sidenav>
+
+<div class="container">
+    <div>
+        <div class="add-product">
+            <button mat-raised-button class="btn-add" (click)="openDialogAdd()">+ Add</button>
+        </div>
+
+        <div class="search-product">
+            <mat-form-field>
+                <input matInput name="productName" [(ngModel)]="productName" placeholder="asearch product">
+            </mat-form-field>
+        </div>
+
+        <div class="sort-product">
+            <mat-form-field>
+                <mat-label>Sort by</mat-label>
+                <select matNativeControl [(ngModel)]="sortType">
+                    <option value="1">Price</option>
+                    <option value="2">Name</option>
+                </select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="products">
+        <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+        <div class="products-list" >
+            <app-product *ngFor="let product of products | search: productName | sortProducts: sortType " 
+                [product]="product" (details)="showMoreDetails(product)" (remove)="deleteProduct($event)">
+            </app-product>
+        </div>
+
+        <div class="product-details" *ngIf="productSelected">
+            <app-product-details [product]="productSelected" (save)="saveDetails($event)">
+            </app-product-details>
+        </div>
+    </div>
+
+     <mat-paginator 
+        [length]="products?.length" 
+        [pageSize]="4" 
+        (page)="pageEvent($event)">
+    </mat-paginator>
+</div>

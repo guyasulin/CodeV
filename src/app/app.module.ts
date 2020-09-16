@@ -6,32 +6,50 @@ import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
- 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
+
 /*material*/ 
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { ProductComponent } from './product/product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { AddProductComponent } from './popup/add-product/add-product.component';
+import { DeleteProductComponent } from './popup/delete-product/delete-product.component';
+import { SaveProductDetailsComponent } from './popup/save-product-details/save-product-details.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    ProductComponent,
+    ProductDetailsComponent,
+    AddProductComponent,
+    DeleteProductComponent,
+    SaveProductDetailsComponent,
+    SearchPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
+
     AngularMaterialModule,
-    
-    HttpClientModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
   ],
-  providers: [],
+  entryComponents:[
+    AddProductComponent,
+    DeleteProductComponent,
+    SaveProductDetailsComponent
+  ],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
